@@ -23,7 +23,7 @@ class MovieCard extends React.Component {
       >
       <CardMedia
         sx={{ height: 300 }}
-        image={this.state.movie.thumbnail}
+        image={this.state.movie.cover}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

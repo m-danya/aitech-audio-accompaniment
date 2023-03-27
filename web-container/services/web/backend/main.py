@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
 from pathlib import Path
 from filelock import FileLock
+import json
 
 from download_video import download_video
 
@@ -36,10 +37,13 @@ def movies():
     for movie_dir in MOVIES_DIR.glob('*'):
         with open (movie_dir / 'name.txt') as f:
             name = f.read().strip()
+        with open (movie_dir / 'timecodes.json') as f:
+            timecodes = json.load(f)
         movies.append({
             'id': movie_dir.name,
             'name': name,
-            # "id/cover.jpg" and "id/movie.mp4" are constants
+            'timecodes': timecodes['timecodes'],
+            # "id/cover.jpg" and "id/movie.mp4" are always there
         })
     return {
         'movies': sorted(movies, key=lambda x: int(x['id']))
@@ -67,7 +71,6 @@ def add():
     print('new id is', id)
     new_movie_dir = MOVIES_DIR / str(id)
     new_movie_dir.mkdir()
-
     download_video(url, new_movie_dir)
     return {
         'result': f'downloaded {url}'

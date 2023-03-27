@@ -7,7 +7,7 @@ class KionHeader extends React.Component {
 
   render() {
     return (
-      <div style={{display: 'inline', cursor: 'pointer'}}>
+      <div style={{display: 'inline', cursor: 'pointer'}} height={75}>
         <Grid container spacing={2} onClick={this.props.goToMain}>
           <Grid item xs={1.4}>
             <img src="favicon-512.svg" height="50px"/>
