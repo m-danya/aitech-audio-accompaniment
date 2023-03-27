@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile.prod
+  nginx:
+    ports:
+      - 443:80
+    depends_on:
+      - web

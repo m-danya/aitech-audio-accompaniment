@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./web-container/services/web
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:8888 main:app
+    volumes:
+      - volume-frontend:/static/frontend
+      - ./static_volume:/static/volume/static
+  nginx:
+    build: ./web-container/services/nginx
+    volumes:
+      - volume-frontend:/static/frontend
+      - ./static_volume:/static/volume/static
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  volume-frontend:
