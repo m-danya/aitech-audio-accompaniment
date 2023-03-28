@@ -1,0 +1,47 @@
+upstream flask {
+    server web:8888;
+}
+
+server {
+    listen 80 default_server;
+ 
+    server_name _;
+ 
+    return 301 https://$host$request_uri;
+}
+
+server {
+
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    root /static/frontend;
+
+    ssl_certificate /etc/nginx/fullchain.crt;
+    ssl_certificate_key /etc/nginx/ssl.key;
+
+
+    location /api {
+        proxy_pass http://flask;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+
+    location /static/ {
+        root /static/volume;
+        try_files $uri @frontend_static;
+    }
+
+    location @frontend_static {
+        root /static/frontend;
+        try_files $uri =404;
+    }
+
+    location / {
+        root /static/frontend;
+        try_files $uri $uri/ /index.html =404;
+    }
+
+}
+

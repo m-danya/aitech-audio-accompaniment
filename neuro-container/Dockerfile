@@ -23,6 +23,8 @@ RUN python setup.py build develop
 
 RUN mkdir -p models
 
+WORKDIR /app/vinvl-visualbackbone/scene_graph_benchmark/models
+
 RUN apt install git-lfs
 RUN git-lfs install
 RUN git clone https://huggingface.co/michelecafagna26/vinvl_vg_x152c4
@@ -52,7 +54,10 @@ COPY . /app
 WORKDIR /app/tests
 WORKDIR /app
 
-RUN mkdir -p /static/volume/static
-VOLUME /static/volume/static
+RUN mv /app/vinvl-visualbackbone/scene_graph_benchmark/models/vinvl_vg_x152c4 /app/vinvl-visualbackbone/scene_graph_benchmark/models/vinvl
 
-RUN python /app/tests/test_pipeline.py
+WORKDIR /app/apex/VinVL/Oscar/
+RUN git clone https://huggingface.co/michelecafagna26/vinvl-base-image-captioning
+
+WORKDIR /app
+# CMD python /app/tests/test_pipeline.py

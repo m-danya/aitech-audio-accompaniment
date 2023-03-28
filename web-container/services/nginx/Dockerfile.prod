@@ -1,0 +1,6 @@
+FROM nginx:1.23-alpine
+
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf.prod /etc/nginx/conf.d/nginx.conf
+COPY ./fullchain.crt /etc/nginx
+COPY ./ssl.key /etc/nginx

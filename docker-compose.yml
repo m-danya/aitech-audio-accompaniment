@@ -9,6 +9,8 @@ services:
     volumes:
       - volume-frontend:/static/frontend
       - ./static_volume:/static/volume/static
+    # depends_on:
+    #   - neuro
   neuro:
     build:
       context: ./neuro-container
@@ -17,8 +19,6 @@ services:
     volumes:
       - volume-frontend:/static/frontend
       - ./static_volume:/static/volume/static
-    depends_on:
-      - web
   nginx:
     build: ./web-container/services/nginx
     volumes:

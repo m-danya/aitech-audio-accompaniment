@@ -19,7 +19,8 @@ class MoviePage extends React.Component {
     this.state = {
       playing: false,
       aaIsEnabled: true,
-      url: this.props.movie.video
+      url: this.props.movie.video,
+      lastAudioSeconds: -1,
     };
     this.intervalFunction = this.intervalFunction.bind(this);
     this.changeAaIsEnabled = this.changeAaIsEnabled.bind(this);
@@ -38,35 +39,29 @@ class MoviePage extends React.Component {
   }
 
   intervalFunction(playerData) {
-    if (!this.state.aaIsEnabled) {
+    if (!this.state.aaIsEnabled || !this.state.playing) {
       return;
     }
-    let triggered = false;
     for (let timecode of this.props.movie.timecodes) {
       let delta = Math.abs(playerData.playedSeconds - timecode.time);
-      if (delta <= INTERVAL_s) {
-        if (!this.state.justTriggered) {
-          triggered = true;
-          this.setState({
-              timecode: timecode,
-              audio: timecode.sound,
-              justTriggered: true,
-              playing: false,
-              url: this.props.movie.video
-            },
-            () => {
-              console.log("FIRE", this.state.timecode.time);
-              this.state.audio.play()
-              setTimeout(() => {
-                this.setState({playing: true})
-              }, timecode.duration * 1000)
-            }
-          );
-        }
+      let deltaFromPrev = Math.abs(playerData.playedSeconds - this.state.lastAudioSeconds);
+      if ((delta <= INTERVAL_s / 2) && (deltaFromPrev >= 0.5)) {
+        this.setState({
+            timecode: timecode,
+            audio: timecode.sound,
+            justTriggered: true,
+            playing: false,
+            lastAudioSeconds: playerData.playedSeconds
+          },
+          () => {
+            console.log("FIRE", this.state.timecode.time);
+            this.state.audio.play()
+            setTimeout(() => {
+              this.setState({playing: true})
+            }, timecode.duration * 1000)
+          }
+        );
       }
-    }
-    if (!triggered) {
-      this.setState({justTriggered: triggered})
     }
   }
 

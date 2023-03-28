@@ -9,6 +9,9 @@ venv
 __pycache__
 .env
 database.db
+fullchain.crt
+ssl.key
+
 
 # dependencies
 /node_modules

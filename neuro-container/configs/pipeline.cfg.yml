@@ -3,7 +3,7 @@ splitter:
   frame_skip: 0
 
 descriptor:
-  model: /home/aic/models_description/apex/VinVL/Oscar/vinvl-base-image-captioning
+  model: /app/apex/VinVL/Oscar/vinvl-base-image-captioning
   device: cpu
 
 translation:
