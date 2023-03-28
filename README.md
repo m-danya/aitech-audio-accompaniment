@@ -13,5 +13,5 @@ And open [http://localhost:1337](http://localhost:1337)
 Put `fullchain.crt` and `ssl.key` into `web-container/services/nginx`
 
 ```bash
-docker-compose up --build -f docker-compose.yml docker-compose.prod.yml
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build nginx
 ```
