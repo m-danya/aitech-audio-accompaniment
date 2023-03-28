@@ -93,7 +93,7 @@ class MoviePage extends React.Component {
             file: {
               attributes: {
                 preload: 'auto',
-                forceVideo: 'true'
+                forceVideo: 'true',
               }
             }
           }}
@@ -103,6 +103,7 @@ class MoviePage extends React.Component {
           onProgress={this.intervalFunction}
           onPlay={() => {this.setState({playing: true})}}
           progressInterval={INTERVAL}
+          playsinline={true} // for Safari & iOS
         />
       </div>
     );
