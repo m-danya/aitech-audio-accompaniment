@@ -5,6 +5,7 @@ import './App.css';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import MovieCard from "./MovieCard";
+import AddMovieCard from "./AddMovieCard";
 
 class Movies extends React.Component {
   constructor(props) {
@@ -25,6 +26,12 @@ class Movies extends React.Component {
               />
             </Grid>
           ))}
+            <Grid item xs={2}>
+              <AddMovieCard 
+                
+              />
+            </Grid>
+
           
       </Grid>
     )

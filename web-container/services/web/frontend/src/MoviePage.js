@@ -86,25 +86,30 @@ class MoviePage extends React.Component {
             />
           </FormGroup>
         </div>
+        {this.props.movie.name == "Назад в будущее" && 
         <ReactPlayer
-          url={this.state.url}
-          playing={this.state.playing}
-          config={{
-            file: {
-              attributes: {
-                preload: 'auto',
-                forceVideo: 'true',
-              }
+        url={this.state.url}
+        playing={this.state.playing}
+        config={{
+          file: {
+            attributes: {
+              preload: 'auto',
+              forceVideo: 'true',
             }
-          }}
-          width={"auto"}
-          height={"calc(100vh - 230px)"}
-          controls={true}
-          onProgress={this.intervalFunction}
-          onPlay={() => {this.setState({playing: true})}}
-          progressInterval={INTERVAL}
-          playsinline={true} // for Safari & iOS
-        />
+          }
+        }}
+        width={"auto"}
+        height={"calc(100vh - 230px)"}
+        controls={true}
+        onProgress={this.intervalFunction}
+        onPlay={() => {this.setState({playing: true})}}
+        progressInterval={INTERVAL}
+        playsinline={true} // for Safari & iOS
+      />}
+      {this.props.movie.name != "Назад в будущее" && 
+        <h3>Пока не добавили</h3>
+      }
+      
       </div>
     );
   }

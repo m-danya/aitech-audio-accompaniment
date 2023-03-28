@@ -13,7 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import axios from "axios";
 
-const BACKEND_ADDRESS = 'https://aitech-kion.ru'; // TODO: replace with domain name
+const BACKEND_ADDRESS = 'http://127.0.0.1:1337'; // TODO: replace with domain name
 const MOVIE_DATA_ADDRESS = `${BACKEND_ADDRESS}/static/movies`
 
 const darkTheme = createTheme({
