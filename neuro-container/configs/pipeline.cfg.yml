@@ -1,0 +1,13 @@
+splitter:
+  threshold_splitter: 27.0
+  frame_skip: 0
+
+descriptor:
+  model: /home/aic/models_description/apex/VinVL/Oscar/vinvl-base-image-captioning
+  device: cpu
+
+translation:
+  model: facebook/wmt19-en-ru
+  device: cpu
+
+

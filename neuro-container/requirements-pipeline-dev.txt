@@ -1,0 +1,8 @@
+opencv-python==4.7.0.72
+scenedetect==0.6.1
+yt_dlp==2023.3.4
+transformers==4.27.3
+PyYAML==6.0
+sacremoses==0.0.53
+torch # any
+
