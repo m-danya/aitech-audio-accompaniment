@@ -4,5 +4,8 @@ yt_dlp==2023.3.4
 transformers==4.27.3
 PyYAML==6.0
 sacremoses==0.0.53
-torch # any
+pytorch-transformers==1.2.0
+torch==1.11.0
+torchaudio==0.11.0
+torchvision==0.12.0
 

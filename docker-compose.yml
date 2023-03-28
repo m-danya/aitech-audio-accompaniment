@@ -9,6 +9,16 @@ services:
     volumes:
       - volume-frontend:/static/frontend
       - ./static_volume:/static/volume/static
+  neuro:
+    build:
+      context: ./neuro-container
+      dockerfile: Dockerfile
+    # command: gunicorn --bind 0.0.0.0:8888 main:app
+    volumes:
+      - volume-frontend:/static/frontend
+      - ./static_volume:/static/volume/static
+    depends_on:
+      - web
   nginx:
     build: ./web-container/services/nginx
     volumes:
