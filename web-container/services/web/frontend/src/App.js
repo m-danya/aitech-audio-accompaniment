@@ -21,7 +21,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from "axios";
 
-const BACKEND_ADDRESS = 'https://aitech-kion.ru'; // TODO: replace with domain name
+const BACKEND_ADDRESS = 'https://aitech-kion.ru';
 const MOVIE_DATA_ADDRESS = `${BACKEND_ADDRESS}/static/movies`
 
 const darkTheme = createTheme({
