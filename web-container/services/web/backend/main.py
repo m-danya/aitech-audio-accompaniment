@@ -34,7 +34,8 @@ NEURO_BACKEND_ADDRESS = 'http://neuro:8888'
 lock_file = FileLock(QUEUE_FILE)
 
 def queue_is_locked() -> bool:
-    return QUEUE_FILE.exists() and lock_file.is_locked
+    print('checking lock', QUEUE_FILE.exists(), lock_file.is_locked)
+    return lock_file.is_locked
 
 
 @app.route("/api/queue")
@@ -90,7 +91,7 @@ def add():
         if 'ERROR: ' in name:
             raise Exception
         path_for_name_file = new_movie_dir / 'name_not_ready.txt'
-        path_for_cover_file = new_movie_dir / 'name_not_ready.txt'
+        path_for_cover_file = new_movie_dir / 'cover.jpg'
         shutil.copy(str(DEFAULT_COVER), str(path_for_cover_file))
         with open(path_for_name_file, 'w') as f:
             f.write(name)   
@@ -114,11 +115,16 @@ def add():
 def success():
     print('got success!')
     lock_file.release()
+    if QUEUE_FILE.exists():
+        QUEUE_FILE.unlink()
     name_file_path = Path(
         request.json['video_dir_path']
     ) / "name_not_ready.txt"
     
     name_file_path.rename(name_file_path.with_name("name.txt"))
+
+    return 'ok'
+
 
 
 

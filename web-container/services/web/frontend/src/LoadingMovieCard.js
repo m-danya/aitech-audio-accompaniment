@@ -38,12 +38,12 @@ class LoadingMovieCard extends React.Component {
       /> */}
         <CardContent
           sx={{ height: 120 }}>
-          <Typography gutterBottom variant="h6" component="div">
-            Новое видео обрабатывается
+          <Typography gutterBottom variant="h5" component="div">
+            Видео обрабатывается
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-          Description
-        </Typography> */}
+          <Typography variant="body2" color="text.secondary">
+          Перезагрузите страницу, чтобы проверить готовность
+        </Typography>
         </CardContent>
       </Card>
     );

@@ -109,7 +109,6 @@ class App extends React.Component {
     this.setState({
       addPopupIsOpened: true
     })
-    console.log('hi')
   };
 
   handlePopupClose = () => {

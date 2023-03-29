@@ -1,5 +1,5 @@
 splitter:
-  threshold_splitter: 27.0
+  threshold_splitter: 35.0
   frame_skip: 0
 
 descriptor_scene:
