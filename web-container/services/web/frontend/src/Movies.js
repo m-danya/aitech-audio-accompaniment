@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import MovieCard from "./MovieCard";
 import AddMovieCard from "./AddMovieCard";
+import LoadingMovieCard from "./LoadingMovieCard"
 
 class Movies extends React.Component {
   constructor(props) {
@@ -26,9 +27,12 @@ class Movies extends React.Component {
               />
             </Grid>
           ))}
+          {this.props.queue_is_locked && <Grid item xs={2}>
+              <LoadingMovieCard />
+            </Grid>}
             <Grid item xs={2}>
               <AddMovieCard 
-                
+                handlePopupOpen={this.props.handlePopupOpen}
               />
             </Grid>
 

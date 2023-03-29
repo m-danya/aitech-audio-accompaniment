@@ -48,10 +48,7 @@ WORKDIR /app
 
 COPY patches/vinvl-visualbackbone/ /app/vinvl-visualbackbone/
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y # TODO: move upper
-RUN pip install omegaconf # TODO: move upper
 
-COPY . /app
-WORKDIR /app/tests
 WORKDIR /app
 
 RUN mv /app/vinvl-visualbackbone/scene_graph_benchmark/models/vinvl_vg_x152c4 /app/vinvl-visualbackbone/scene_graph_benchmark/models/vinvl
@@ -60,4 +57,9 @@ WORKDIR /app/apex/VinVL/Oscar/
 RUN git clone https://huggingface.co/michelecafagna26/vinvl-base-image-captioning
 
 WORKDIR /app
-# CMD python /app/tests/test_pipeline.py
+COPY . /app
+
+# BACKEND
+WORKDIR /app
+
+RUN pip install requests # TODO: move to requirements

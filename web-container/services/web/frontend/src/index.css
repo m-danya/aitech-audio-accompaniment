@@ -2,3 +2,7 @@ html {
   background: #001424;
   color: white;
 }
+
+.MuiDialog-paper {
+  background: #001424 !important;
+}

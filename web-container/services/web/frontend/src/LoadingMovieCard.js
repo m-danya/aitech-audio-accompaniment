@@ -11,8 +11,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 
-class AddMovieCard extends React.Component {
+class LoadingMovieCard extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -21,8 +22,7 @@ class AddMovieCard extends React.Component {
     return (
       <Card
         sx={{ maxWidth: 300 }}
-        className="movieCard"
-        onClick={this.props.handlePopupOpen}
+        // onClick={this.props.handlePopupOpen}
       >
         <CardContent
           style={{
@@ -31,15 +31,15 @@ class AddMovieCard extends React.Component {
             height: "300px",
           }}
         >
-          <AddIcon sx={{ fontSize: 100 }} style={{ height: "300px", cursor: "pointer"}} />
+          <HourglassTopIcon sx={{ fontSize: 100 }} style={{ height: "300px"}} />
         </CardContent>
         {/* <CardMedia
         image={this.state.movie.cover}
       /> */}
         <CardContent
-                sx={{ height: 120 }}>
+          sx={{ height: 120 }}>
           <Typography gutterBottom variant="h6" component="div">
-            Добавить видео
+            Новое видео обрабатывается
           </Typography>
           {/* <Typography variant="body2" color="text.secondary">
           Description
@@ -50,4 +50,4 @@ class AddMovieCard extends React.Component {
   }
 }
 
-export default AddMovieCard;
+export default LoadingMovieCard;

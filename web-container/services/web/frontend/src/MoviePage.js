@@ -26,10 +26,8 @@ class MoviePage extends React.Component {
     this.changeAaIsEnabled = this.changeAaIsEnabled.bind(this);
   }
   
-  componentDidMount(props) {
-    this.setState({
-      playing: false
-    })
+  componentDidMount() {
+    this.setState({playing: false})
   }
 
   changeAaIsEnabled(event) {
@@ -48,13 +46,13 @@ class MoviePage extends React.Component {
       if ((delta <= INTERVAL_s / 2) && (deltaFromPrev >= 0.5)) {
         this.setState({
             timecode: timecode,
-            audio: timecode.sound,
+            audio: new Audio(timecode.sound),
             justTriggered: true,
             playing: false,
             lastAudioSeconds: playerData.playedSeconds
           },
           () => {
-            console.log("FIRE", this.state.timecode.time);
+            console.log("FIRE", this.state.audio);
             this.state.audio.play()
             setTimeout(() => {
               this.setState({playing: true})
@@ -86,7 +84,6 @@ class MoviePage extends React.Component {
             />
           </FormGroup>
         </div>
-        {this.props.movie.name == "Назад в будущее" && 
         <ReactPlayer
         url={this.state.url}
         playing={this.state.playing}
@@ -105,10 +102,7 @@ class MoviePage extends React.Component {
         onPlay={() => {this.setState({playing: true})}}
         progressInterval={INTERVAL}
         playsinline={true} // for Safari & iOS
-      />}
-      {this.props.movie.name != "Назад в будущее" && 
-        <h3>Пока не добавили</h3>
-      }
+      />
       
       </div>
     );

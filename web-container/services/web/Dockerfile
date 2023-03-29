@@ -24,4 +24,6 @@ RUN pip install -r requirements.txt
 # copy project
 COPY /backend/ /app/backend/
 
+RUN pip install requests # TODO: move to requirements
+
 EXPOSE 443

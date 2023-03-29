@@ -15,7 +15,7 @@ services:
     build:
       context: ./neuro-container
       dockerfile: Dockerfile
-    # command: gunicorn --bind 0.0.0.0:8888 main:app
+    command: gunicorn --bind 0.0.0.0:8888 neuro_backend:app
     volumes:
       - volume-frontend:/static/frontend
       - ./static_volume:/static/volume/static

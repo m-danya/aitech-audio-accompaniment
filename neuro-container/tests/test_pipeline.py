@@ -9,7 +9,7 @@ sys.path.append(
 from pipeline import PipelineVideoPrepare
 
 if __name__ == "__main__":
-    pipe = PipelineVideoPrepare(path_to_video="/static/volume/static/movies/1/video.mp4")
+    pipe = PipelineVideoPrepare(path_to_video="/static/volume/static/movies/2/video.mp4")
 
     pipe.run()
     print(pipe.scenes_speeches)
