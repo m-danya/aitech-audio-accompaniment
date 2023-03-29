@@ -2,12 +2,17 @@ splitter:
   threshold_splitter: 27.0
   frame_skip: 0
 
-descriptor:
+descriptor_scene:
   model: /app/apex/VinVL/Oscar/vinvl-base-image-captioning
   device: cpu
+  threshold: 0.8
+  window_len: 3
+
+descriptor_background:
+  model: /app/apex/VinVL/Oscar/vinvl-base-finetuned-hl-scenes-image-captioning
+  device: cpu
+  threshold: 0.5
 
 translation:
   model: facebook/wmt19-en-ru
   device: cpu
-
-

@@ -13,9 +13,10 @@ if __name__ == "__main__":
     kpt = "/app/apex/VinVL/Oscar/vinvl-base-image-captioning"
     device = "cpu"
     detector = SceneDescripter(kpt, device)
-
-    # scene_frame = cv2.imread("/app/aic/audio-accompaniment/pics/temp_pic.jpg")
-    scenes_backbones = detector.detect_backbones(scene_frame)
-    print(scenes_backbones)
-    scenes_descriptions = detector.get_scene_description(**scenes_backbones)
-    print(scenes_descriptions)
+    
+    # place pic to enable this test
+    # scene_frame = cv2.imread("/home/aic/audio-accompaniment/pics/temp_pic.jpg")
+    # scenes_backbones = detector.detect_backbones(scene_frame)
+    # print(scenes_backbones)
+    # scenes_descriptions = detector.get_scene_description(**scenes_backbones)
+    # print(scenes_descriptions)

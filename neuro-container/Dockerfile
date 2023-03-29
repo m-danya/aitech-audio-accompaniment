@@ -55,9 +55,18 @@ RUN mv /app/vinvl-visualbackbone/scene_graph_benchmark/models/vinvl_vg_x152c4 /a
 
 WORKDIR /app/apex/VinVL/Oscar/
 RUN git clone https://huggingface.co/michelecafagna26/vinvl-base-image-captioning
+RUN git clone https://huggingface.co/michelecafagna26/vinvl-base-finetuned-hl-scenes-image-captioning
 
 WORKDIR /app
 COPY . /app
+
+
+
+WORKDIR /app
+
+# INITIALIZE ALL MODELS
+RUN python -c "from pipeline import PipelineVideoPrepare; PipelineVideoPrepare()"
+
 
 # BACKEND
 WORKDIR /app

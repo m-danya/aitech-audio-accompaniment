@@ -8,6 +8,14 @@ import sys
 sys.stdout = sys.stderr  # for debugging flask
 
 
+sys.path.append("/app")
+sys.path.append("/app/apex/VinVL/Oscar")
+sys.path.append(
+    "/app/vinvl-visualbackbone/scene_graph_benchmark"
+)
+from pipeline import PipelineVideoPrepare
+
+
 app = Flask(__name__)
 api = Api()
 
@@ -18,15 +26,22 @@ cors = CORS(app)
 STATIC_VOLUME = Path('/static/volume/static')
 WEB_BACKEND_ADDRESS = 'http://web:8888'
 
+pipe = PipelineVideoPrepare()
 
 @app.route("/neuro_api/process", methods=["POST"])
 def process():
     print('started processing')
     video_path = Path(request.json['video_path'])
     video_dir_path = video_path.parent
+    
+    print('running pipeline for', video_path)
+    
+    pipe.run(path_to_video=video_path)
+
     requests.post(
         f"{WEB_BACKEND_ADDRESS}/api/success",
         json={"video_dir_path": str(video_dir_path)}
     )
-    print('sent success')
+    
+    print('processing finished: sent success')
     return 'ok'

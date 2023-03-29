@@ -9,25 +9,21 @@ from scenedetect.detectors import ContentDetector
 class SceneSplitter:
     def __init__(
         self,
-        path_to_video: str,
         threshold_splitter: float = 27.0,
         frame_skip: int = 0,
     ):
-        self.path_to_video = path_to_video
-        self.video_manager = VideoManager([self.path_to_video])
-        self.scene_manager = SceneManager()
-        self.scene_manager.add_detector(
-            ContentDetector(threshold=threshold_splitter)
-        )
+        self.threshold_splitter = threshold_splitter
         self.frame_skip = frame_skip
+        self.video_manager = None
 
     def get_frame_from_video(
         self,
         scene_avr_frame,
+        path_to_video,
     ) -> tp.Dict[str, np.array]:
         """Get frame from scene."""
 
-        cap = cv2.VideoCapture(self.path_to_video)
+        cap = cv2.VideoCapture(path_to_video)
 
         frame_idx = 0
         list_frame = dict()
@@ -48,18 +44,24 @@ class SceneSplitter:
         return list_frame
 
     def start_video_manager(
-        self,
+            self, path_to_video: str
     ) -> None:
         """Start video manager."""
 
-        self.video_manager.set_downscale_factor()
-        self.video_manager.start()
+        video_manager = VideoManager([path_to_video])
+        video_manager.set_downscale_factor()
+        video_manager.start()
+        return video_manager
 
     def get_average_frame(
-        self,
+        self, path_to_video
     ) -> tp.List[int]:
         """Get average frame from scene."""
-
+        
+        self.scene_manager = SceneManager()
+        self.scene_manager.add_detector(
+            ContentDetector(threshold=self.threshold_splitter)
+        )
         self.scene_manager.detect_scenes(
             frame_source=self.video_manager, frame_skip=self.frame_skip
         )
@@ -74,14 +76,14 @@ class SceneSplitter:
             for scene in scene_list
         ]
 
-        return self.get_frame_from_video(scene_avr_frame)
+        return self.get_frame_from_video(scene_avr_frame, path_to_video)
 
     def get_scenes_frames(
-        self,
+        self, path_to_video
     ) -> tp.Dict[str, np.array]:
         """Get average scene frames and their timecode."""
 
-        self.start_video_manager()
-        scene_avr_frame = self.get_average_frame()
+        self.video_manager = self.start_video_manager(path_to_video)
+        scene_avr_frame = self.get_average_frame(path_to_video)
 
         return scene_avr_frame

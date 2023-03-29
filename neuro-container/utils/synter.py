@@ -2,6 +2,7 @@ import torch
 import torchaudio
 from omegaconf import OmegaConf
 import datetime
+from pathlib import Path
 
 class TextToSpeech:
     def __init__(self, device: str = "cpu"):
@@ -38,13 +39,12 @@ class TextToSpeech:
         return audio
 
     def save_audio(
-        self, audio: torch.Tensor, name: str, sample_rate: int = 48000
+        self, audio: torch.Tensor, name: Path, sample_rate: int = 48000
     ) -> str:
-        name = f"{name}.mp3"
-        torchaudio.save(name, audio.unsqueeze(0), sample_rate=sample_rate)
+        torchaudio.save(str(name), audio.unsqueeze(0), sample_rate=sample_rate)
         
         time_in_seconds = len(audio)/sample_rate
         time_delta = datetime.timedelta(seconds=time_in_seconds)
         time_formatted = (datetime.datetime.min + time_delta).time().strftime('%H:%M:%S.%f')[:-3]
 
-        return {'name': name, 'duration': time_formatted}
+        return {'name': name.name, 'duration': time_formatted}
